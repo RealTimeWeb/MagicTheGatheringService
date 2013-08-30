@@ -1,4 +1,4 @@
-class Print(object):
+class ExpansionPrint(object):
     """
     The print expansion this belongs to.
     """
@@ -26,5 +26,5 @@ class Print(object):
         :type json_data: dict
         :returns: Print
         """
-        return Print(json_data['set'],
-                    json_data['id'])
+        return ExpansionPrint(json_data['set'],
+                              json_data['id'])

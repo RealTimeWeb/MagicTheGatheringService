@@ -1,5 +1,5 @@
-from print import Print
-from list(string) import List(String)
+from expansion_print import ExpansionPrint
+
 class Card(object):
     """
     A Magic the Gathering Card
@@ -35,7 +35,7 @@ class Card(object):
         :param rarity: How rare this card is, typically either "uncommon", "common", or "rare".
         :type rarity: string
         :param all_sets: All the expansion sets that this belongs to.
-        :type all_sets: listof Print
+        :type all_sets: listof ExpansionPrint
         :param number: The Card Number.
         :type number: string
         :param artist: The name of the artist for the card's artwork.
@@ -85,7 +85,7 @@ class Card(object):
                     json_data['watermark'],
                     json_data['set'],
                     json_data['rarity'],
-                    map(Print._from_json, json_data['prints']),
+                    map(ExpansionPrint._from_json, json_data['prints']),
                     json_data['number'],
                     json_data['artist'],
                     json_data['rating'],
