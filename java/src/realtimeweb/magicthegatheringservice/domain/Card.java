@@ -25,7 +25,7 @@ public class Card {
 	private String convertedManaCost;
 	private ArrayList<String> types;
 	private ArrayList<String> texts;
-	private ArrayList<list(string)> flavors;
+	private ArrayList<String> flavors;
 	private String power;
 	private String toughness;
 	private String watermark;
@@ -145,7 +145,7 @@ public class Card {
 	
 	 * @return ArrayList<list(string)>
 	 */
-	public ArrayList<list(string)> getFlavors() {
+	public ArrayList<String> getFlavors() {
 		return this.flavors;
 	}
 	
@@ -153,7 +153,7 @@ public class Card {
 	 * 
 	 * @param flavors Any flavor texts on this card.
 	 */
-	public void setFlavors(ArrayList<list(string)> flavors) {
+	public void setFlavors(ArrayList<String> flavors) {
 		this.flavors = flavors;
 	}
 	
@@ -344,20 +344,29 @@ public class Card {
 	 * @param gson The Gson parser. See <a href='https://code.google.com/p/google-gson/'>https://code.google.com/p/google-gson/</a> for more information.
 	 * @return 
 	 */
+	@SuppressWarnings("unchecked")
 	public  Card(JsonObject json, Gson gson) {
 		this.id = json.get("id").getAsString();
 		this.name = json.get("name").getAsString();
-		this.manaCost = gson.fromJson(json.get("mana").getAsJsonArray(), ArrayList<String>.class);
+		this.manaCost = gson.fromJson(json.get("mana").getAsJsonArray(), ArrayList.class);
 		this.convertedManaCost = json.get("cmc").getAsString();
-		this.types = gson.fromJson(json.get("type").getAsJsonArray(), ArrayList<String>.class);
-		this.texts = gson.fromJson(json.get("text").getAsJsonArray(), ArrayList<String>.class);
-		this.flavors = gson.fromJson(json.get("flavor").getAsJsonArray(), ArrayList<list(string)>.class);
+		this.types = gson.fromJson(json.get("type").getAsJsonArray(), ArrayList.class);
+		this.texts = gson.fromJson(json.get("text").getAsJsonArray(), ArrayList.class);
+		if (json.get("flavor").getAsJsonArray().size() > 0) {
+			this.flavors = gson.fromJson(json.get("flavor").getAsJsonArray().get(0).getAsJsonArray(), ArrayList.class);
+		} else {
+			this.flavors = new ArrayList<String>();
+		}
 		this.power = json.get("power").getAsString();
 		this.toughness = json.get("power").getAsString();
 		this.watermark = json.get("watermark").getAsString();
 		this.set = json.get("set").getAsString();
 		this.rarity = json.get("rarity").getAsString();
-		this.allSets = gson.fromJson(json.get("prints").getAsJsonArray(), ArrayList<Print>.class);
+		JsonArray js = json.get("prints").getAsJsonArray();
+		this.allSets = new ArrayList<Print>(); 
+		for (int i = 0; i < js.size(); i += 1) {
+			this.allSets.add(new Print(js.get(i).getAsJsonObject(), gson));
+		}
 		this.number = json.get("number").getAsString();
 		this.artist = json.get("artist").getAsString();
 		this.rating = json.get("rating").getAsString();
@@ -385,7 +394,7 @@ public class Card {
 	 * @param votes The number of times this card has been voted on.
 	 * @return 
 	 */
-	public  Card(String id, String name, ArrayList<String> manaCost, String convertedManaCost, ArrayList<String> types, ArrayList<String> texts, ArrayList<list(string)> flavors, String power, String toughness, String watermark, String set, String rarity, ArrayList<Print> allSets, String number, String artist, String rating, String votes) {
+	public  Card(String id, String name, ArrayList<String> manaCost, String convertedManaCost, ArrayList<String> types, ArrayList<String> texts, ArrayList<String> flavors, String power, String toughness, String watermark, String set, String rarity, ArrayList<Print> allSets, String number, String artist, String rating, String votes) {
 		this.id = id;
 		this.name = name;
 		this.manaCost = manaCost;

@@ -2,6 +2,8 @@ package realtimeweb.magicthegatheringservice.structured;
 
 import realtimeweb.magicthegatheringservice.main.AbstractMagicTheGatheringService;
 import realtimeweb.magicthegatheringservice.util.Util;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import com.google.gson.Gson;
@@ -96,7 +98,7 @@ public class StructuredMagicTheGatheringService implements AbstractMagicTheGathe
 	 * @param keyword The search term to find this card.
 	 * @return HashMap<String, Object>
 	 */
-	public HashMap<String, Object> searchCards(String keyword) throws Exception {
+	public ArrayList searchCards(String keyword) throws Exception {
 		return gson.fromJson(jsonInstance.searchCards(keyword), ArrayList.class);
 	}
 	

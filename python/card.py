@@ -79,7 +79,7 @@ class Card(object):
                     json_data['cmc'],
                     json_data['type'],
                     json_data['text'],
-                    map(list(string)._from_json, json_data['flavor']),
+                    json_data['flavor'][0] if json_data['flavor'] else [],
                     json_data['power'],
                     json_data['power'],
                     json_data['watermark'],

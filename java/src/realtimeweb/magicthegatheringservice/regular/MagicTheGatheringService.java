@@ -96,7 +96,7 @@ public class MagicTheGatheringService implements AbstractMagicTheGatheringServic
 		    public void getCardCompleted(String response) {
 		        JsonParser parser = new JsonParser();
 		JsonObject top = parser.parse(response).getAsJsonObject();
-		        Card result = new Card(top, gson)
+		        Card result = new Card(top, gson);
 		        callback.getCardCompleted(result);
 		    }
 		});
