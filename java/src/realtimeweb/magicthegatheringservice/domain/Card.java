@@ -358,7 +358,7 @@ public class Card {
 			this.flavors = new ArrayList<String>();
 		}
 		this.power = json.get("power").getAsString();
-		this.toughness = json.get("power").getAsString();
+		this.toughness = json.get("toughness").getAsString();
 		this.watermark = json.get("watermark").getAsString();
 		this.set = json.get("set").getAsString();
 		this.rarity = json.get("rarity").getAsString();

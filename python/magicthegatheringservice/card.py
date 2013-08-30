@@ -81,7 +81,7 @@ class Card(object):
                     json_data['text'],
                     json_data['flavor'][0] if json_data['flavor'] else [],
                     json_data['power'],
-                    json_data['power'],
+                    json_data['toughness'],
                     json_data['watermark'],
                     json_data['set'],
                     json_data['rarity'],
